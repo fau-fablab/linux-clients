@@ -1,0 +1,22 @@
+---
+
+# Install and enbale dnf-automatic to automaticaly upgrade packages
+
+- name: install dnf-automatic
+  dnf: name=dnf-automatic state=present
+  tags:
+  - packages
+  when: ansible_distribution == 'Fedora'
+
+- name: install /etc/dnf/automatic.conf
+  template: src=automatic.conf.j2 dest=/etc/dnf/automatic.conf mode=0644
+  tags:
+  - config
+  when: ansible_distribution == 'Fedora'
+
+- name: enable and start dnf-automatic
+  systemd:
+    name: dnf-automatic.timer
+    enabled: yes
+    state: started
+  when: ansible_distribution == 'Fedora'

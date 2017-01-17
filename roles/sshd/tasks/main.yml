@@ -1,0 +1,23 @@
+---
+
+# install configure enable and start sshd
+
+- name: install openssh-server
+  dnf:
+    name=openssh-server
+    state=present
+
+- name: configure ssh
+  template:
+    src="sshd_config.j2"
+    dest=/etc/ssh/sshd_config
+    owner=root
+    group=root
+    mode=644
+  notify: restart sshd
+
+- name: enable and start sshd
+  systemd:
+    name: sshd.service
+    enabled: yes
+    state: started

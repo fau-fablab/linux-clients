@@ -1,0 +1,10 @@
+---
+
+- name: workstation deployment
+  hosts: workstations
+  roles:
+  - dnf-packages
+  - dnf-automatic
+  - users
+  - sshd
+  - chronyd
