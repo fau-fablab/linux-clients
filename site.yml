@@ -1,0 +1,11 @@
+---
+
+- name: workstation deployment
+  hosts: workstations
+  roles:
+  - { role: dnf-packages, tags: 'dnf-packages' }
+  - { role: dnf-automatic, tags: 'dnf-automatic' }
+  - { role: fablab-share, tags: 'fablab-share' }
+  - { role: users, tags: 'users' }
+  - { role: sshd, tags: 'sshd' }
+  - { role: chronyd, tags: 'chronyd' }
