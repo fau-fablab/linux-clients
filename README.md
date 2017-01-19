@@ -24,7 +24,6 @@ Get debug output with `-vvv`
 ## TODO:
 
 - configure printers
-- configure remmina (RDP)
 - install VisiCut
 
 ## License

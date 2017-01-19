@@ -59,10 +59,18 @@
     group: fablab
     mode: 0600
 
+- name: disable singleclick
+  template:
+    src: kdeglobals.j2
+    dest: /home/fablab/.config/kdeglobals
+    owner: fablab
+    group: fablab
+    mode: 0600
+
 - name: add desktop links to desktop
   file:
-    src: /usr/share/applications/{{ item }}.desktop
-    dest: /home/fablab/Schreibtisch/{{ item }}.desktop
+    src: "/usr/share/applications/{{ item }}.desktop"
+    dest: "/home/fablab/Schreibtisch/{{ item }}.desktop"
     state: link
   with_items:
     - firefox
@@ -71,3 +79,27 @@
     - libreoffice-calc
     - libreoffice-writer
     - org.kde.konsole
+
+- name: remove home desktop icon
+  file:
+    path: /home/fablab/Schreibtisch/Home.desktop
+    state: absent
+
+- name: add ws11 rdp config file
+  template:
+    src: ws11-rdp.remmina.j2
+    dest: /home/fablab/.local/share/remmina/ws11-rdp.remmina
+    owner: fablab
+    group: fablab
+    mode: 0644
+
+- name: add ws11 rdp and fablab share desktop icon
+  template:
+    src: "{{ item }}.desktop.j2"
+    dest: "/home/fablab/Schreibtisch/{{ item }}.desktop"
+    owner: fablab
+    group: fablab
+    mode: 0644
+  with_items:
+    - ws11
+    - Freigabe
