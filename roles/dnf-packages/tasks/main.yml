@@ -37,6 +37,7 @@
   - kde-connect
   - fedora-bookmarks
   - qupzilla
+  - qt5-qdbusviewer
 
 # needs too long
 # - name: upgrade all packages
@@ -62,3 +63,4 @@
   - libreoffice
   - vlc
   - remmina
+  - git

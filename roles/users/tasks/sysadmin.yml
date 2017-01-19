@@ -5,7 +5,7 @@
 - name: sysadmin user
   user:
     name=sysadmin
-    groups=wheel
+    groups=wheel,fablab
     append=yes
     shell=/bin/bash
   tags: base

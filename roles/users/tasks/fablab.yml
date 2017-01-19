@@ -34,3 +34,40 @@
     owner: root
     group: root
     mode: 0644
+
+- name: don't lock the screen
+  template:
+    src: kscreenlockerrc.j2
+    dest: /home/fablab/.config/kscreenlockerrc
+    owner: fablab
+    group: fablab
+    mode: 0600
+
+- name: disable screen corners
+  template:
+    src: kwinrc.j2
+    dest: /home/fablab/.config/kwinrc
+    owner: fablab
+    group: fablab
+    mode: 0600
+
+- name: set default samba password (if someone tries to access brain via kde tools)
+  template:
+    src: kioslaverc.j2
+    dest: /home/fablab/.config/kioslaverc
+    owner: fablab
+    group: fablab
+    mode: 0600
+
+- name: add desktop links to desktop
+  file:
+    src: /usr/share/applications/{{ item }}.desktop
+    dest: /home/fablab/Schreibtisch/{{ item }}.desktop
+    state: link
+  with_items:
+    - firefox
+    - inkscape
+    - gimp
+    - libreoffice-calc
+    - libreoffice-writer
+    - org.kde.konsole
