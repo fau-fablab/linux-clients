@@ -1,0 +1,36 @@
+---
+
+# set up the fablab user
+
+- name: fablab user
+  user:
+    name=fablab
+    password={{ 'fablab'|password_hash('sha512') }}
+    groups=
+    append=yes
+    shell=/bin/bash
+  tags: base
+
+- name: add face icon
+  copy:
+    src: fab_cube_whitebg.svg
+    dest: /home/fablab/.face.icon
+    owner: fablab
+    group: fablab
+    mode: 0666
+
+- name: fix acl for face icon
+  acl:
+    path: /home/fablab
+    entity: sddm
+    etype: user
+    permissions: x
+    state: present
+
+- name: add sddm config to autologin fablab user
+  template:
+    src: sddm.conf.j2
+    dest: /etc/sddm.conf
+    owner: root
+    group: root
+    mode: 0644
