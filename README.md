@@ -23,7 +23,6 @@ Get debug output with `-vvv`
 
 ## TODO:
 
-- mount samba share
 - configure printers
 - configure remmina (RDP)
 - install VisiCut

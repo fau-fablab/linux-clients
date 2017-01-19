@@ -2,7 +2,7 @@
 
 # install and remove packages
 
-# this wouldn't work with dnf module the first time
+# dnf module would fail the first time
 - name: install deps for ansible modules
   command: dnf install -y libselinux-python3
   args:
@@ -30,11 +30,13 @@
   - kdepim-common
   - anaconda-gui
   - plasma-discover
+  - apper
   - telepathy-qt5
   - calligra-core
   - konqueror
   - kde-connect
   - fedora-bookmarks
+  - qupzilla
 
 # needs too long
 # - name: upgrade all packages

@@ -1,0 +1,16 @@
+---
+
+# Mount fablab share at boot
+
+- name: Install SMB/CIFS utils
+  dnf:
+    name=cifs-utils
+    state=present
+
+- name: Mount fablab samba share
+  mount:
+    name: /mnt/fablab-share
+    src: //brain.fablab.fau.de/fablab-share
+    state: mounted
+    fstype: cifs
+    opts: uid=1001,gid=1001,username=fablab,password=fablab,workgroup=fablab,iocharset=utf8
