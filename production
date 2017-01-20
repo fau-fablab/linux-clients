@@ -4,3 +4,4 @@ fablab-ws04.lab.fablab.uni-erlangen.de
 
 [workstations:vars]
 ansible_python_interpreter=/usr/bin/python3
+ansible_ssh_user=sysadmin
