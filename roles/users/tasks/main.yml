@@ -2,5 +2,5 @@
 
 # Set up users
 
-- include: ./sysadmin.yml
 - include: ./fablab.yml
+- include: ./sysadmin.yml

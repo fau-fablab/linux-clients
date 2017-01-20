@@ -35,6 +35,17 @@
     group: root
     mode: 0644
 
+- name: create required directories
+  file:
+    path={{ item }}
+    state=directory
+    owner=fablab
+    group=fablab
+  with_items:
+    - /home/fablab/.config/
+    - /home/fablab/.local/share/remmina/
+    - /home/fablab/Schreibtisch/
+
 - name: don't lock the screen
   template:
     src: kscreenlockerrc.j2

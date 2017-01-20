@@ -1,5 +1,6 @@
 [workstations]
-fablab-ws[02:02].lab.fablab.uni-erlangen.de
+fablab-ws02.lab.fablab.uni-erlangen.de
+fablab-ws04.lab.fablab.uni-erlangen.de
 
 [workstations:vars]
 ansible_python_interpreter=/usr/bin/python3
