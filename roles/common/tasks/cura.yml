@@ -1,0 +1,32 @@
+---
+
+- name: install cura from fedora package sources
+  dnf:
+    name: cura
+    state: present
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - visicut-install
+    - packages
+
+- name: add cura config folder
+  file:
+    path: /home/fablab/.cura/15.04.4
+    state: directory
+    owner: fablab
+    group: fablab
+    mode: 'u=rwX,g=rwX,o=rX'
+  tags:
+    - cura-config
+    - configs
+
+- name: add cura config file
+  template:
+    src: cura/preferences.ini.j2
+    dest: /home/fablab/.cura/15.04.4/preferences.ini
+    owner: fablab
+    group: fablab
+    mode: 'u=rw,g=rw,o=r'
+  tags:
+    - cura-config
+    - configs

@@ -21,3 +21,7 @@
 - import_tasks: visicut.yml
   tags:
     - visicut
+
+- import_tasks: cura.yml
+  tags:
+    - cura
