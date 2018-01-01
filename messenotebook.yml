@@ -1,0 +1,9 @@
+---
+# Group file 
+######################
+
+- name: messe
+  hosts: messe 
+  roles:
+  - debian-messenotebook
+  
