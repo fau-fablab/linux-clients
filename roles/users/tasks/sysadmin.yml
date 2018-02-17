@@ -9,7 +9,8 @@
     append: yes
     shell: /bin/bash
 
-- authorized_key:
+- name: add authorized keys to user sysadmin
+  authorized_key:
     user: sysadmin
     key: '{{item}}'
   with_items: '{{ ssh_pubkeys.values }}'

@@ -1,6 +1,0 @@
----
-
-- name: restart sshd
-  systemd:
-    name: '{{ service_names.sshd }}.service'
-    state: restarted

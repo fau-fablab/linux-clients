@@ -12,7 +12,7 @@
     - ntp
     - chronyd
 
-- import_tasks: dnf-automatic
+- import_tasks: dnf-automatic.yml
   when: ansible_distribution == 'Fedora'
   tags:
     - unattented-upgrades
