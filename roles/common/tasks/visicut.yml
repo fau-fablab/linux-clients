@@ -1,0 +1,33 @@
+---
+
+# install VisiCut
+
+- name: install VisiCut dependencies
+  package:
+    name: '{{ pkg_names[item]|default(item) }}'
+    state: present
+  with_items:
+    - openjdk-8-jre
+    - potrace
+  tags:
+    - visicut-packages
+    - packages
+
+# may be slow. Download server is weird sometimes.
+# TODO: download latest version
+- name: download VisiCut
+  get_url:
+    url: https://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-4-gf11597ba-1_all.deb
+    dest: /var/run/visicut.deb
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+  tags:
+    - visicut-download
+
+# TODO add instructions for Fedora
+
+- name: install VisiCut
+  command: dpkg -i /var/run/visicut.deb
+  when: ansible_distribution in ["Debian", "Ubuntu"]
+  tags:
+    - visicut-install
+    - packages

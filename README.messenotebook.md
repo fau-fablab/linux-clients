@@ -1,3 +1,0 @@
-- install Debian stable (or Ubuntu)
-- setup SSH access (user with sudo login, similar to how it is described in README.md)
-- deploy with `ansible-playbook site.yml [--diff]`

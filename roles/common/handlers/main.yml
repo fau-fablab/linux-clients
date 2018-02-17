@@ -1,0 +1,7 @@
+---
+
+- import_handler: chronyd.yml
+- import_handler: sshd.yml
+
+- name: reboot required
+  command: touch /var/run/reboot-required && echo ansible_playbook_notification >> /var/run/reboot-required.pkgs

@@ -1,0 +1,23 @@
+---
+
+# configure, enable and start chronyd (time synchronization deamon)
+
+- name: configure chrony
+  template:
+    src: chrony.conf.j2
+    dest: /etc/chrony.conf
+    owner: root
+    group: root
+    mode: 'u=rw,g=r,o=r'
+  notify: restart chronyd
+  tags:
+    - chronyd-config
+    - config
+
+- name: enable and start chronyd
+  systemd:
+    name: chronyd.service
+    enabled: true
+  tags:
+    - chronyd-service
+    - service

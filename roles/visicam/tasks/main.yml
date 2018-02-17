@@ -1,0 +1,74 @@
+---
+
+# Install VisiCam
+
+- name: VisiCam packages
+  package:
+    name: '{{ pkg_names[item]|default(item) }}'
+    state: present
+  with_items:
+    - openjdk-8-jdk
+    - libopencv2.4-java
+    - ant
+    - git
+    - v4l2ucp
+    - fswebcam
+  tags:
+    - packages
+
+- name: clone VisiCam
+  git:
+    repo: https://github.com/t-oster/VisiCam.git
+    dest: /opt/VisiCam/
+    update: false  # no auto-updates via ansible
+
+# TODO: add `creates` keyword
+- name: build VisiCam
+  shell: cd /opt/VisiCam && ./lib/fetch-javacv.sh && ant
+
+- name: clone VisiCam config
+  git:
+    repo: https://github.com/fau-fablab/visicam-config
+    dest: /opt/visicamconfig
+    update: false  # no auto-updates via ansible
+
+- name: symlink VisiCam config 1
+  file:
+    src: '/opt/visicamconfig/{{ item }}'
+    dest: '/opt/VisiCam/{{ item }}'
+    state: link
+  with_items:
+    - visicam.conf
+    - camera-script
+
+- name: add VisiCam service user
+  user:
+    name: visicam
+    system: true
+
+- name: VisiCam permissions (rough workaround)
+  file:
+    path: /opt/VisiCam
+    state: directory
+    owner: visicam
+
+- name: VisiCam permissions (rough workaround)
+  file:
+    path: /opt/visicamconfig/camera-script
+    state: directory
+    owner: visicam
+
+- name: copy VisiCam service
+  copy:
+    remote_src: true
+    src: /opt/VisiCam/init-scripts/visicam.service
+    dst: /lib/systemd/system/
+    owner: root
+    group: root
+    mode: 'u=rw,g=r,o=r'
+  notify: restart visicam
+
+- name: enable VisiCam service
+  systemd:
+    name: visicam.service
+    enabled: true

@@ -1,0 +1,9 @@
+---
+
+# add package names, that are called differently in fedora than in other distributions:
+pkg_names:
+  apache: httpd
+
+# add systemd service names, that are called differently in fedora than in other distributions:
+service_names:
+  apache: httpd

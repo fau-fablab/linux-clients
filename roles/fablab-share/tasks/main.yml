@@ -3,9 +3,11 @@
 # Mount fablab share at boot
 
 - name: Install SMB/CIFS utils
-  dnf:
-    name=cifs-utils
-    state=present
+  package:
+    name: cifs-utils
+    state: present
+  tags:
+    - packages
 
 - name: Mount fablab samba share
   mount:

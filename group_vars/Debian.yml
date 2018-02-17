@@ -1,0 +1,8 @@
+---
+
+# add package names, that are called differently in debian than in other distributions:
+pkg_names:
+
+# add systemd service names, that are called differently in debian than in other distributions:
+service_names:
+  sshd: ssh

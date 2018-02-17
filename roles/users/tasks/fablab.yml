@@ -4,12 +4,11 @@
 
 - name: fablab user
   user:
-    name=fablab
-    password={{ 'fablab'|password_hash('sha512') }}
-    groups=
-    append=yes
-    shell=/bin/bash
-  tags: base
+    name: fablab
+    password: "{{ 'fablab'|password_hash('sha512') }}"
+    groups:
+    append: true
+    shell: /bin/bash
 
 - name: add face icon
   copy:
@@ -17,7 +16,7 @@
     dest: /home/fablab/.face.icon
     owner: fablab
     group: fablab
-    mode: 0666
+    mode: 'u=rw,g=rw,o=rw'
 
 - name: fix acl for face icon
   acl:
@@ -37,10 +36,10 @@
 
 - name: create required directories
   file:
-    path={{ item }}
-    state=directory
-    owner=fablab
-    group=fablab
+    path: '{{ item }}'
+    state: directory
+    owner: fablab
+    group: fablab
   with_items:
     - /home/fablab/.config/
     - /home/fablab/.local/share/remmina/
@@ -52,7 +51,7 @@
     dest: /home/fablab/.config/kscreenlockerrc
     owner: fablab
     group: fablab
-    mode: 0600
+    mode: 'u=rw,g=o='
 
 - name: disable screen corners
   template:
@@ -60,7 +59,7 @@
     dest: /home/fablab/.config/kwinrc
     owner: fablab
     group: fablab
-    mode: 0600
+    mode: 'u=rw,g=o='
 
 - name: set default samba password (if someone tries to access brain via kde tools)
   template:
@@ -68,7 +67,7 @@
     dest: /home/fablab/.config/kioslaverc
     owner: fablab
     group: fablab
-    mode: 0600
+    mode: 'u=rw,g=o='
 
 - name: disable singleclick
   template:
@@ -76,7 +75,7 @@
     dest: /home/fablab/.config/kdeglobals
     owner: fablab
     group: fablab
-    mode: 0600
+    mode: 'u=rw,g=o='
 
 - name: add desktop links to desktop
   file:
@@ -102,7 +101,7 @@
     dest: /home/fablab/.local/share/remmina/ws11-rdp.remmina
     owner: fablab
     group: fablab
-    mode: 0644
+    mode: 'u=rw,g=,o='
 
 - name: add ws11 rdp and fablab share desktop icon
   template:
@@ -110,7 +109,7 @@
     dest: "/home/fablab/Schreibtisch/{{ item }}.desktop"
     owner: fablab
     group: fablab
-    mode: 0644
+    mode: 'u=rw,g=r,o=r'
   with_items:
     - ws11
     - Freigabe

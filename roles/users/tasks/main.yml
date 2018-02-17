@@ -3,4 +3,6 @@
 # Set up users
 
 - include: ./fablab.yml
+  tags: user-fablab
 - include: ./sysadmin.yml
+  tags: user-sysadmin
