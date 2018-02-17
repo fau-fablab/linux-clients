@@ -1,29 +1,40 @@
 # {{ ansible_managed }}
-
-server ntp3.fau.de iburst
-server ntp0.fau.de iburst
-server ntp2.fau.de iburst
-server ntp1.fau.de iburst
 pool 2.fedora.pool.ntp.org iburst
+{% for server in ntp_server %}
+server {{ server }} iburst
+{% endfor %}
+
+# Use public servers from the pool.ntp.org project.
+# Please consider joining the pool (http://www.pool.ntp.org/join.html).
 
 # Record the rate at which the system clock gains/losses time.
 driftfile /var/lib/chrony/drift
 
-# In first three updates step the system clock instead of slew
-# if the adjustment is larger than 1 second.
+# Allow the system clock to be stepped in the first three updates
+# if its offset is larger than 1 second.
 makestep 1.0 3
 
 # Enable kernel synchronization of the real-time clock (RTC).
 rtcsync
 
-# Allow NTP client access from local network.
-#allow 192.168/16
+# Enable hardware timestamping on all interfaces that support it.
+#hwtimestamp *
 
-# Serve time even if not synchronized to any NTP server.
+# Increase the minimum number of selectable sources required to adjust
+# the system clock.
+#minsources 2
+
+# Allow NTP client access from local network.
+#allow 192.168.0.0/16
+
+# Serve time even if not synchronized to a time source.
 #local stratum 10
 
 # Specify file containing keys for NTP authentication.
 #keyfile /etc/chrony.keys
+
+# Get TAI-UTC offset and leap seconds from the system tz database.
+leapsectz right/UTC
 
 # Specify directory for log files.
 logdir /var/log/chrony

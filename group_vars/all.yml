@@ -56,3 +56,9 @@ packages:
       - qt5-qdbusviewer
     Debian:
     Ubuntu:
+
+ntp_server:
+  - ntp0.fau.de
+  - ntp1.fau.de
+  - ntp2.fau.de
+  - ntp3.fau.de
