@@ -1,0 +1,19 @@
+---
+
+- name: download Atom rpm package (Fedora)
+  get_url:
+    url: 'https://atom.io/download/rpm'
+    dest: /var/run/atom.rpm
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - atom-download
+    - platformio-download
+
+- name: install Atom (Fedora)
+  dnf:
+    name: /var/run/atom.rpm
+    state: present
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - atom-install
+    - platformio-install
