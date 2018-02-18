@@ -1,0 +1,23 @@
+---
+
+- import_tasks: packages.yml
+  tags: packages
+
+- import_tasks: sshd.yml
+  tags: sshd
+
+- import_tasks: chronyd.yml
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - ntp
+    - chronyd
+
+- import_tasks: dnf-automatic.yml
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - unattented-upgrades
+    - dnf-automatic
+
+- import_tasks: visicut.yml
+  tags:
+    - visicut

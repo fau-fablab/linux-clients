@@ -1,0 +1,21 @@
+---
+
+- name: restart chronyd
+  systemd:
+    name: chronyd
+    state: restarted
+
+- name: restart dnf-automatic
+  systemd:
+    name: dnf-automatic.timer
+    state: restarted
+
+- name: restart sshd
+  systemd:
+    name: "{{ service_names.sshd|default('sshd') }}.service"
+    state: restarted
+
+- name: reboot required
+  command: >
+    touch /var/run/reboot-required &&
+    echo ansible_playbook_notification >> /var/run/reboot-required.pkgs

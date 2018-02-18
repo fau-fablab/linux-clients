@@ -5,3 +5,15 @@ fablab-ws04.lab.fablab.uni-erlangen.de
 [workstations:vars]
 ansible_python_interpreter=/usr/bin/python3
 ansible_ssh_user=sysadmin
+
+[messenotebooks]
+messenotebook
+
+[messenotebooks:vars]
+# IP oder Hostname muss entsprechend angepasst werden
+ansible_host=10.188.64.124
+ansible_user=sysadmin
+# Je nach Distribution muss diese Zeile auskommentiert werden
+ansible_python_interpreter=/usr/bin/python3
+
+# vi: ft=conf

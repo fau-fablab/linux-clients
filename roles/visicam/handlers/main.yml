@@ -1,0 +1,6 @@
+---
+
+- name: restart visicam
+  service:
+    name: visicam
+    state: restarted

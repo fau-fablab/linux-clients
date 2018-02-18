@@ -1,30 +1,57 @@
 # {{ ansible_managed }}
+#	$OpenBSD: sshd_config,v 1.101 2017/03/14 07:19:07 djm Exp $
 
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/local/bin:/usr/bin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
+# If you want to change the port on a SELinux system, you have to tell
+# SELinux about this change.
+# semanage port -a -t ssh_port_t -p tcp #PORTNUMBER
+#
 Port 22
-AddressFamily any
+
+# listen only on ipv4
+AddressFamily inet
+
+# use protocol 2
 Protocol 2
+#ListenAddress 0.0.0.0
+#ListenAddress ::
 
-AllowUsers sysadmin
-
-# HostKeys for protocol version 2
 HostKey /etc/ssh/ssh_host_rsa_key
 HostKey /etc/ssh/ssh_host_ecdsa_key
 HostKey /etc/ssh/ssh_host_ed25519_key
 
-# Lifetime and size of ephemeral version 1 server key
-KeyRegenerationInterval 3600
-ServerKeyBits 1024
+# Ciphers and keying
+#RekeyLimit default none
+
+# System-wide Crypto policy:
+# If this system is following system-wide crypto policy, the changes to
+# Ciphers, MACs, KexAlgoritms and GSSAPIKexAlgorithsm will not have any
+# effect here. They will be overridden by command-line options passed on
+# the server start up.
+# To opt out, uncomment a line with redefinition of  CRYPTO_POLICY=
+# variable in  /etc/sysconfig/sshd  to overwrite the policy.
+# For more information, see manual page for update-crypto-policies(8).
 
 # Logging
-SyslogFacility AUTH
+#SyslogFacility AUTH
+SyslogFacility AUTHPRIV
 LogLevel INFO
 
 # Authentication:
 
-# how long to wait (in seconds) for authentication before disconnecting the user
-LoginGraceTime 30
+# how long to wait for authentication before disconnecting the user
+LoginGraceTime 30s
 
-# allow login as root?
+# don't allow login as root
 PermitRootLogin no
 
 # checks file permissions in user directories and disables login for that user
@@ -40,7 +67,7 @@ MaxSessions 10
 PubkeyAuthentication yes
 
 # file that contains the public keys that can be used for user authentication
-AuthorizedKeysFile	%h/.ssh/authorized_keys
+AuthorizedKeysFile	.ssh/authorized_keys
 
 #AuthorizedPrincipalsFile none
 
@@ -50,18 +77,14 @@ AuthorizedKeysCommand none
 # don't allow host based authentication
 HostbasedAuthentication no
 
-# don't ignore the user's known_hosts file
+# don't ignore the user's known_hosts file for HostbasedAuthentication
 IgnoreUserKnownHosts no
 
 # don't read the user's ~/.rhosts and ~/.shosts files
 IgnoreRhosts yes
-# For this to work you will also need host keys in /etc/ssh_known_hosts
-RhostsRSAAuthentication no
 
 # disable tunneled clear text passwords
 PasswordAuthentication no
-
-X11Forwarding no
 
 # never allow empty passwords
 PermitEmptyPasswords no
@@ -92,21 +115,22 @@ GSSAPICleanupCredentials no
 # If you just want the PAM account and session checks to run without
 # PAM authentication, then enable this but set PasswordAuthentication
 # and ChallengeResponseAuthentication to 'no'.
+# WARNING: 'UsePAM no' is not supported in Fedora and may cause several
+# problems.
 UsePAM yes
 
 AllowAgentForwarding no
 AllowTcpForwarding yes
 #GatewayPorts no
 
+X11Forwarding no
+#X11DisplayOffset 10
+#X11UseLocalhost yes
+
 #PermitTTY yes
-PrintMotd yes
+PrintMotd no
 PrintLastLog yes
 TCPKeepAlive yes
-UseLogin no
-
-# separate privileges by creating an unprivileged childprocess
-# to deal with incoming network traffic
-UsePrivilegeSeparation sandbox
 
 # disable environment processing in order to
 # disallow users to bypass access restrictions
@@ -119,11 +143,15 @@ Compression delayed
 ClientAliveInterval 0
 ClientAliveCountMax 3
 
-#UseDNS yes
+ShowPatchLevel no
+
+# don't allow hostnames in ~/.ssh/authorized_keys from and sshd_config Match Host directives
+UseDNS no
+
 #PidFile /var/run/sshd.pid
 
 # maximum number of concurrent unauthenticated connections to the SSH daemon
-MaxStartups 10:30:60
+MaxStartups 10:30:100
 
 # don't allow tun device forwarding
 PermitTunnel no
@@ -143,4 +171,4 @@ AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
 AcceptEnv XMODIFIERS
 
 # allow sftp-server as a subsystem
-Subsystem sftp /usr/libexec/openssh/sftp-server
+Subsystem	sftp	/usr/libexec/openssh/sftp-server

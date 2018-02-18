@@ -1,0 +1,66 @@
+---
+
+ssh_pubkeys:
+  max: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAQEAv/jLE7PzZHNX5DzETH8dX6cyajXxdT+M44RFA7zuAxlIUVMwZgSeuFl83dY+ycFxCWlQQ9Gx/AYhxewBMbUwz7XxOWE40fxq08Ree+sxBVx5B7vXCsmXsA0rFotcEItziB/we59Qb7Ak/6fQgKlvX+z94B97UoJDGi1i76NaRTbVmxeWlQAclYmgcdO42vof7zJPsiw1tqmrjccukT5EezBpIDscARskjWTPKi9N43Q4yr0hu1Dx7tHF3x99S8aGiiSpXuNDby1tdQPHsd3Pm78W0JZVgeN2YaxDX3mfGBl9y2rBXp5b9FMVJ/vRGEZuKbI1HUbinwZkvSPag+01Vw== max@max-thinkpad'
+  basti: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCKrnCEkMta2vFaO3Bk1D24uan0i4mTT+mtiL4CLqpntywq21oqGZBEnT5aN0W4cuHvCnyFJ0jWO4XuSf6oOrGpDM0DsjOPxqoHUzGtXuVJijzwLcoDijoeU+h5FVaQirK32DaA0R2pld68zayQVgNOERQGTLXsoNVgEQ4maObF8kTUji8yPYHuvmlTgfppkuIhstQNJLDzoppL0lNn9KFpzjkEQ4BHcnEws5hszYd7AXI668gy90sNajOnSb7XKuPG7WTVwnUa+v8j9dpf5bjdIXSQ8IW34ad8cheVX3nTvKkSS+39JOuXZRPL83iHiprJL2nwdbB5AmQ8yafo244d2tzrG15k7hWMkegDUqvR90VWt4iqwqJJX2orQXLwJKLVwfYFt/cnnhDtM6XhPxuOgVtFVGbgXf0Fu56hXXFE8W59zmHEN/extGkBt5BG6DdJD0zGNeOUrls5zzfvTt/NpUcQvxT+nve2WSs38G6rZqPDvkGw+jf4XmGDZozK2xqDRS7NhryxiEF+rtd5+/siUHoV4Rod2FDX6blZzomlloZhvPIPPlnx5HDJsruUXf9LvxQmTnvGT2JSv+OLhb/S5S+3in8C3/h6aiugc0ALHy+1a1OuGNJmzS44Qk5f//RD4d/j9uO7kPp5OtPpdve3LJSHoLAwBbHBBH3NOiipuw== Sedrubal Nitro Key'
+  patrick: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDZYAy+ND7xA5WmWLiadoae1foODyvAhXNB/oEkDVK4h8pgiEHhr1bAl3lzFgAfQOPo2mXAC9MVVjhECikVtp6VfprNGCMlPd1gVWhGTPPwll8qOFKRQKDRbePLO4YJW87AgQQqrOYeMT56D+JwU1BHpvjf0XGWO9zD1nwcVkUb0jdC58OADahQr6j2kKZMUFCeyyM2HtiIhSDmOyrhJ7cKK6DDX49E7LeCVSrugUeFYvzaNss6YBZHx91gp1SoWcUOb8cqOOsArXSnHuFlAEq2m8bIGNyHZSBQ3/WEMmsnyqKt2VtVzfK7cU220ziXZ9REgOLf/U3sn2t9IvyezZ4H Patrick@Patrick-L-WIN7'
+  julian: 'ssh-rsa AAAAB3NzaC1yc2EAAAABIwAAAgEDJzSTdWCcp+fm287+z0XxDNY08u1OZiTp038xyJ2EtcsLxexq8X2lJGRNUKV5Hul66zE7zXmQVTOGjkGHZG5BFJkCjkfiitMFC14ZWcLxhDdriLeCVLrwvvjiBnbDu07Uc6V+0Fdmao4p7VlQR9nwh+BkGNl+Oa2XcyM3C5hv6sC8zFcIXzpdPnJ4/6zZLsbaGfztXQ5MEVKwnuQ2CcSnBJnzNdKKjvRNLEOZe9LIN0B1vdxeQs43u6YqPVCF1Wu/9FciX9Aj4cOYB/O92xS7RZTi49UVllLH1PsgC1t4MwJbAUpycKmCDMsYzB68faQmTDfR3hVcWsWGyKfmAGXmd5DIeiBSL6iBed3/b/bKUw6xxuDc/mB017qwnkw2QGKeL5QiVy7abtmboLkaQgKvjBJreG3aRqC9i3JEdJYNaKR7cSqElfbOJNVI5SmreT7opbXgCztdS144U1EchDNrc6bfHA99R/xx1/6RPfwadHf+ai03Z9hUm0BgwwNX8qE4DG76HD4pTN6q8b+CVgfzwXXtRy77kQqddb7/Ez0/AqU7JKZKVDpw2yR0SIXFVVImnPLRvdtKaUdlpOaPX2RWpyk4JlXZ5wuXdzBAIMREi0VECKkO3hPWbD+U4J/k4w+G2QfrRT4/hIuLaRAsERhbR/gfhxU16LPg5FOkZsKLeyk='
+  unknown: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDjDj6kuHmy8+9BPWuN0dcCWjGJTd3EXdHmFkFaifkhWk6aNIdLlXyUabfGR+1heJItjjhWVFuFe+hwbZF4N6pZrgcUC6+X8VMFzwT8zr/uHuVdV/QfIauDiX6aqXKGce4R4luQfl4+fI3L1zu2djD2Sl5FeHY8IhMUivfi9nwVIeG+hnv/dEgrwOGp6CRYfDwSLION5q6MDg88kSlBRunq+fEdSo4s4sfoI9A7rL0Ca8h/cHCu755pP5BZAtZV2Rh7dCnhUWw8OAG2qkURj2+eLc/potmj5guF4SfOYj2Q2Z+WYnquD8g2wdez8SVc2iss8xahp1ytRjeD7qIhs30UBLhlposfPT0g70WLA2rWGv/MKn3c3uTfGr53un3gZAOVwTEZyyuwX/qpI7CSRW4qyX/jcciYGvuHtUIFaZruRydKUCgLZiNScKfI9VYJ2HlOoZxiwrFjiwUsBXKbxQqKm5wrCpqjOwhTG3LGzktLyDhu01zlpzF/tZJdyjCcBRS4O3KRvP0bYzxP+WnJNA6HIQQ3ICL8N2yEW2mv59al4EHWIjcLUY/ePxydByQYbsFi0zZsHTx2AO6Sy+Vp7XdtmUNpA/9U/i6rmJ7jiAk5v/BGxEZEydx1cGNtUJIh5Uf3Vupqk1gnBoBaZIku/gIq+552qSGqANB7srUC1aRVdw== julian@linuxbox'
+
+# The distribution specific list is only for packages that are only needed for single distributions.
+# If there are packages with a different name in different distributions but you generally want it to be installed on each distribution, add the odd name to ./<distro>.yml
+packages:
+  present:
+    all:
+      - blender
+      - firefox
+      - freecad
+      - gimp
+      - git
+      - htop
+      - iftop
+      - inkscape
+      - kicad
+      - libreoffice
+      - ncdu
+      - openscad
+      - remmina
+      - remmina-plugins-rdp
+      - tmux
+      - tree
+      - vim
+      - vlc
+    Fedora: []
+    Debian:
+      - bash-completion
+      - task-kde-desktop
+      - task-german
+      - task-german-kde-desktop
+    Ubuntu: []
+  absent:
+    all: []
+    Fedora:
+      - akonadi
+      - akregator
+      - anaconda-gui
+      - apper
+      - calligra-core
+      - fedora-bookmarks
+      - kaddressbook
+      - kde-connect
+      - kdepim-common
+      - kmail
+      - konqueror
+      - korganizer
+      - plasma-discover
+      - qt5-qdbusviewer
+      - qupzilla
+      - telepathy-qt5
+    Debian: []
+    Ubuntu: []
+
+ntp_server:
+  - ntp0.fau.de
+  - ntp1.fau.de
+  - ntp2.fau.de
+  - ntp3.fau.de

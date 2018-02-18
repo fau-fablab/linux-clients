@@ -1,0 +1,29 @@
+---
+
+# Install and enbale dnf-automatic to automaticaly upgrade packages
+
+- name: install dnf-automatic
+  dnf:
+    name: dnf-automatic
+    state: present
+  tags:
+    - dnf-automatic-packages
+    - packages
+
+- name: install /etc/dnf/automatic.conf
+  template:
+    src: automatic.conf.j2
+    dest: /etc/dnf/automatic.conf
+    mode: 'u=rw,g=r,o=r'
+  notify: restart chronyd
+  tags:
+    - dnf-automatic-config
+    - configs
+
+- name: enable and start dnf-automatic
+  systemd:
+    name: dnf-automatic.timer
+    enabled: true
+  tags:
+    - dnf-automatic-service
+    - services

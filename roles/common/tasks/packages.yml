@@ -1,0 +1,74 @@
+---
+
+# install and remove packages
+
+# dnf module would fail the first time
+- name: install deps for ansible modules
+  command: dnf install -y libselinux-python3
+  args:
+    creates: /usr/lib64/python3.6/site-packages/selinux
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - fedora-packages
+
+- name: add fedora repository rpmfusion
+  dnf:
+    name: 'https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version|int}}.noarch.rpm'
+    state: present
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - fedora-packages
+    - fedora-repos
+    - repos
+
+- name: trust fedora repository rpmfusion gpg key
+  rpm_key:
+    state: present
+    key: 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-{{ansible_distribution_major_version|int}}'
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - fedora-packages
+    - fedora-repos
+    - repos
+
+- name: add debian package sources non-free
+  command: apt-add-repository "deb http://http.debian.net/debian/ stretch main non-free contrib"
+  when: ansible_distribution == 'Debian'
+  tags:
+    - debian-packages
+    - debian-repos
+    - repos
+
+- name: install debian non-free firmware
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  with_items:
+    - firmware-linux-nonfree
+    - firmware-realtek
+    - firmware-iwlwifi
+    - firmware-atheros
+  when: ansible_distribution == 'Debian'
+  tags:
+    - debian-packages
+
+- name: remove unneded packages
+  dnf:
+    name: '{{ pkg_names[item]|default(item) }}'
+    state: absent
+  with_items:
+    - '{{ packages.absent.all }}'
+    - '{{ packages.absent[ansible_distribution] }}'
+  tags:
+    - packages-absent
+
+- name: install common packages
+  dnf:
+    name: '{{ pkg_names[item]|default(item) }}'
+    state: present
+  with_items:
+    - '{{ packages.present.all }}'
+    - '{{ packages.present[ansible_distribution] }}'
+  tags:
+    - packages-present
