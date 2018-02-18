@@ -15,19 +15,81 @@
 
 # may be slow. Download server is weird sometimes.
 # TODO: download latest version
-- name: download VisiCut
+# TODO: validate_certs=false, because SSL Certificate expired RIGHT NOW - lol
+- name: download VisiCut deb package (Debian, Ubuntu)
   get_url:
-    url: https://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-4-gf11597ba-1_all.deb
+    url: 'https://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-9-g6d8bdde7-1_all.deb'
     dest: /var/run/visicut.deb
+    validate_certs: false
   when: ansible_distribution in ["Debian", "Ubuntu"]
   tags:
     - visicut-download
 
-# TODO add instructions for Fedora
-
-- name: install VisiCut
+- name: install VisiCut (Debian, Ubuntu)
   command: dpkg -i /var/run/visicut.deb
   when: ansible_distribution in ["Debian", "Ubuntu"]
+  tags:
+    - visicut-install
+    - packages
+
+# may be slow. Download server is weird sometimes.
+# TODO: download latest version
+# TODO: validate_certs=false, because SSL Certificate expired RIGHT NOW - lol
+- name: download and extract VisiCut zip archive (Fedora)
+  unarchive:
+    src: 'http://download.visicut.org/files/master/All/VisiCut-1.8-9-g6d8bdde7.zip'
+    dest: /opt/
+    remote_src: true
+    validate_certs: false
+    owner: root
+    group: root
+    mode: 'u=rwX,g=rX,o=rX'
+    creates: /opt/visicut/VisiCut.Linux
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - visicut-install
+    - packages
+
+- name: symlink VisiCut scripts (Fedora)
+  file:
+    src: '/opt/visicut/{{ item.src }}'
+    dest: '{{ item.dst }}'
+    state: link
+    owner: root
+    group: root
+    mode: 'u=rwx,g=rx,o=rx'
+  when: ansible_distribution == 'Fedora'
+  with_items:
+    - src: VisiCut.Linux
+      dst: /usr/local/bin/visicut
+    - src: VisiCut.Linux
+      dst: /usr/local/bin/VisiCut.Linux
+    - src: inkscape_extension/daemonize.py
+      dst: /usr/share/inkscape/extensions/daemonize.py
+    - src: inkscape_extension/visicut_export.inx
+      dst: /usr/share/inkscape/extensions/visicut_export.inx
+    - src: inkscape_extension/visicut_export.py
+      dst: /usr/share/inkscape/extensions/visicut_export.py
+    - src: inkscape_extension/visicut_export_replace.inx
+      dst: /usr/share/inkscape/extensions/visicut_export_replace.inx
+  tags:
+    - visicut-install
+    - packages
+
+# see VisiCut debian package
+- name: run VisiCut post install script (Fedora)
+  shell: >
+    xdg-icon-resource install --context mimetypes --size 128 /opt/visicut/examples/Basic/visicut-icon.png application-x-plf &&
+    xdg-icon-resource install --context mimetypes --size 128 /opt/visicut/examples/Basic/visicut-icon.png application-x-ls &&
+
+    xdg-mime install /opt/visicut/plf-mime.xml &&
+    xdg-mime install /opt/visicut/ls-mime.xml &&
+
+    update-desktop-database -q &&
+    gtk-update-icon-cache -q -t -f /usr/share/icons/hicolor &&
+
+    chmod +x /opt/visicut/VisiCut.Linux
+  when: ansible_distribution == 'Fedora'
   tags:
     - visicut-install
     - packages
