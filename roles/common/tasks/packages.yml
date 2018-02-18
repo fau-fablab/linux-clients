@@ -6,12 +6,12 @@
 - name: install deps for ansible modules
   command: dnf install -y libselinux-python3
   args:
-    creates: /usr/lib64/python3.5/site-packages/selinux
+    creates: /usr/lib64/python3.6/site-packages/selinux
   when: ansible_distribution == 'Fedora'
   tags:
     - fedora-packages
 
-- name: install rpmfusion
+- name: add fedora repository rpmfusion
   dnf:
     name: 'https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ansible_distribution_major_version|int}}.noarch.rpm'
     state: present
@@ -21,17 +21,17 @@
     - fedora-repos
     - repos
 
-- name: trust rpmfusion key
+- name: trust fedora repository rpmfusion gpg key
   rpm_key:
     state: present
-    key: 'https://rpmfusion.org/keys?action=AttachFile&do=view&target=RPM-GPG-KEY-rpmfusion-free-fedora-{{ansible_distribution_major_version|int}}'
+    key: 'https://rpmfusion.org/keys?action=AttachFile&do=get&target=RPM-GPG-KEY-rpmfusion-free-fedora-{{ansible_distribution_major_version|int}}'
   when: ansible_distribution == 'Fedora'
   tags:
     - fedora-packages
     - fedora-repos
     - repos
 
-- name: Paketquellen non-free
+- name: add debian package sources non-free
   command: apt-add-repository "deb http://http.debian.net/debian/ stretch main non-free contrib"
   when: ansible_distribution == 'Debian'
   tags:
@@ -39,7 +39,7 @@
     - debian-repos
     - repos
 
-- name: Firmware non-free
+- name: install debian non-free firmware
   apt:
     name: "{{ item }}"
     state: present
@@ -67,7 +67,7 @@
   dnf:
     name: '{{ pkg_names[item]|default(item) }}'
     state: present
-  with_nested:
+  with_items:
     - '{{ packages.present.all }}'
     - '{{ packages.present[ansible_distribution] }}'
   tags:

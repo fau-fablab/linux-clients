@@ -12,8 +12,10 @@
 
 - name: restart sshd
   systemd:
-    name: '{{ service_names.sshd }}.service'
+    name: "{{ service_names.sshd|default('sshd') }}.service"
     state: restarted
 
 - name: reboot required
-  command: touch /var/run/reboot-required && echo ansible_playbook_notification >> /var/run/reboot-required.pkgs
+  command: >
+    touch /var/run/reboot-required &&
+    echo ansible_playbook_notification >> /var/run/reboot-required.pkgs

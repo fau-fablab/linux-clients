@@ -12,50 +12,52 @@ ssh_pubkeys:
 packages:
   present:
     all:
-      - htop
-      - ncdu
-      - tree
-      - iftop
-      - vim
-      - tmux
+      - blender
       - firefox
-      - inkscape
+      - freecad
       - gimp
+      - git
+      - htop
+      - iftop
+      - inkscape
       - kicad
       - libreoffice
-      - vlc
-      - git
-      - blender
+      - ncdu
       - openscad
-      - freecad
       - remmina
       - remmina-plugins-rdp
-    Fedora:
+      - tmux
+      - tree
+      - vim
+      - vlc
+    Fedora: []
     Debian:
       - bash-completion
       - task-kde-desktop
       - task-german
       - task-german-kde-desktop
-    Ubuntu:
+    Ubuntu: []
   absent:
-    all:
+    all: []
     Fedora:
       - akonadi
-      - kmail
-      - kaddressbook
-      - kdepim-common
+      - akregator
       - anaconda-gui
-      - plasma-discover
       - apper
-      - telepathy-qt5
       - calligra-core
-      - konqueror
-      - kde-connect
       - fedora-bookmarks
-      - qupzilla
+      - kaddressbook
+      - kde-connect
+      - kdepim-common
+      - kmail
+      - konqueror
+      - korganizer
+      - plasma-discover
       - qt5-qdbusviewer
-    Debian:
-    Ubuntu:
+      - qupzilla
+      - telepathy-qt5
+    Debian: []
+    Ubuntu: []
 
 ntp_server:
   - ntp0.fau.de

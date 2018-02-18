@@ -2,7 +2,7 @@
 
 # Set up users
 
-- include: ./fablab.yml
+- import_tasks: ./fablab.yml
   tags: user-fablab
-- include: ./sysadmin.yml
+- import_tasks: ./sysadmin.yml
   tags: user-sysadmin

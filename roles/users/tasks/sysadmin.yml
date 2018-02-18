@@ -6,14 +6,14 @@
   user:
     name: sysadmin
     groups: wheel,fablab
-    append: yes
+    append: true
     shell: /bin/bash
 
 - name: add authorized keys to user sysadmin
   authorized_key:
     user: sysadmin
     key: '{{item}}'
-  with_items: '{{ ssh_pubkeys.values }}'
+  with_items: '{{ ssh_pubkeys.values() }}'
   tags:
     - sysadmin-authorized-keys
     - ssh

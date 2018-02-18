@@ -24,9 +24,8 @@
 
 - name: enable and start sshd
   systemd:
-    name: '{{ service_names.sshd }}.service'
-    enabled: yes
-    state: started
+    name: "{{ service_names.sshd|default('sshd') }}.service"
+    enabled: true
   tags:
     - ssh-service
     - services

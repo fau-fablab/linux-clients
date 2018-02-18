@@ -11,7 +11,7 @@ messenotebook
 
 [messenotebooks:vars]
 # IP oder Hostname muss entsprechend angepasst werden
-ansible_host=10.188.64.100
+ansible_host=10.188.64.124
 ansible_user=sysadmin
 # Je nach Distribution muss diese Zeile auskommentiert werden
 ansible_python_interpreter=/usr/bin/python3

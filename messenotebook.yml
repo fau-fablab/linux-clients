@@ -2,7 +2,7 @@
 
 - name: messenotebook deployment
   hosts: messenotebooks
-  vars:
+  vars_files:
     - group_vars/all.yml
     - 'group_vars/{{ ansible_distribution }}.yml'
   roles:
