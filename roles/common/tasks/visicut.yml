@@ -15,12 +15,10 @@
 
 # may be slow. Download server is weird sometimes.
 # TODO: download latest version
-# TODO: validate_certs=false, because SSL Certificate expired RIGHT NOW - lol
 - name: download VisiCut deb package (Debian, Ubuntu)
   get_url:
-    url: 'https://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-9-g6d8bdde7-1_all.deb'
+    url: 'https://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-14-g56bbf936-1_all.deb'
     dest: /var/run/visicut.deb
-    validate_certs: false
   when: ansible_distribution in ["Debian", "Ubuntu"]
   tags:
     - visicut-download
@@ -34,13 +32,11 @@
 
 # may be slow. Download server is weird sometimes.
 # TODO: download latest version
-# TODO: validate_certs=false, because SSL Certificate expired RIGHT NOW - lol
 - name: download and extract VisiCut zip archive (Fedora)
   unarchive:
-    src: 'http://download.visicut.org/files/master/All/VisiCut-1.8-9-g6d8bdde7.zip'
+    src: 'https://download.visicut.org/files/master/All/VisiCut-1.8-14-g56bbf936.zip'
     dest: /opt/
     remote_src: true
-    validate_certs: false
     owner: root
     group: root
     mode: 'u=rwX,g=rX,o=rX'
