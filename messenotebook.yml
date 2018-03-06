@@ -12,3 +12,5 @@
       tags: users
     - role: visicam
       tags: visicam
+    - role: messe-network
+      tags: messe-network

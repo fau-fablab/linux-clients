@@ -1,0 +1,22 @@
+---
+
+- name: install network manager module dependencies
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - dbus-python
+    - NetworkManager-glib
+    - python-gobject
+
+# TODO https://github.com/ansible/ansible/issues/34012
+- name: configure lasercutter lan
+  nmcli:
+    state: present
+    conn_name: 'Lasercutter'
+    autoconnect: false
+    type: ethernet
+    ip4: '10.188.64.42/24'
+    # Lasercutter has 10.188.64.37. See lasercutter.lab.fablab.uni-erlangen.de.
+
+...
