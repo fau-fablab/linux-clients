@@ -32,7 +32,6 @@ Get debug output with `-vvv`
 ## TODO:
 
 - configure printers
-- install VisiCut
 
 ## License
 

@@ -23,7 +23,7 @@
     update: false  # no auto-updates via ansible
 
 - name: build VisiCam
-  shell: cd /opt/VisiCam && ./lib/fetch-javacv.sh && ant
+  shell: cd /opt/VisiCam && ./lib/fetch-javacv.sh && ant -Dnb.internal.action.name=build jar
   args:
     creates: /opt/VisiCam/dist/VisiCam.jar
 

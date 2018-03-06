@@ -6,10 +6,10 @@
     - group_vars/all.yml
     - 'group_vars/{{ ansible_distribution }}.yml'
   roles:
-    - role: common
-      tags: common
     - role: users
       tags: users
+    - role: common
+      tags: common
     - role: visicam
       tags: visicam
     - role: messe-network
