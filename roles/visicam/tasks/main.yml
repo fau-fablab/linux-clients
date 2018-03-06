@@ -8,7 +8,7 @@
     state: present
   with_items:
     - openjdk-8-jdk
-    - libopencv2.4-java
+    # - libopencv2.4-java
     - ant
     - git
     - v4l2ucp
@@ -22,9 +22,10 @@
     dest: /opt/VisiCam/
     update: false  # no auto-updates via ansible
 
-# TODO: add `creates` keyword
 - name: build VisiCam
   shell: cd /opt/VisiCam && ./lib/fetch-javacv.sh && ant
+  args:
+    creates: /opt/VisiCam/dist/VisiCam.jar
 
 - name: clone VisiCam config
   git:
@@ -45,6 +46,7 @@
   user:
     name: visicam
     system: true
+    groups: video
 
 - name: VisiCam permissions (rough workaround)
   file:
@@ -62,7 +64,7 @@
   copy:
     remote_src: true
     src: /opt/VisiCam/init-scripts/visicam.service
-    dst: /lib/systemd/system/
+    dest: /lib/systemd/system/
     owner: root
     group: root
     mode: 'u=rw,g=r,o=r'

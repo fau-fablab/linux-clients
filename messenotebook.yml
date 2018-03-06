@@ -10,3 +10,5 @@
       tags: common
     - role: users
       tags: users
+    - role: visicam
+      tags: visicam

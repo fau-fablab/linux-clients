@@ -4,6 +4,7 @@
 pkg_names:
   apache: httpd
   openjdk-8-jre: java-1.8.0-openjdk
+  openjdk-8-jdk: java-1.8.0-openjdk
 
 # add systemd service names, that are called differently in fedora than in other distributions:
 service_names:
