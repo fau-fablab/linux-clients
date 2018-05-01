@@ -2,6 +2,7 @@
 
 # add package names, that are called differently in debian than in other distributions:
 pkg_names:
+  firefox: firefox-esr
 
 # add systemd service names, that are called differently in debian than in other distributions:
 service_names:

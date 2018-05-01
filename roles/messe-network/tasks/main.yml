@@ -1,6 +1,6 @@
 ---
 
-- name: install network manager module dependencies
+- name: install network manager module dependencies (Fedora)
   package:
     name: '{{ item }}'
     state: present
@@ -8,6 +8,22 @@
     - dbus-python
     - NetworkManager-glib
     - python-gobject
+  when: ansible_distribution == 'Fedora'
+
+- name: install network manager module dependencies (Debian)
+  package:
+    name: '{{ item }}'
+    state: present
+  with_items:
+    - gir1.2-networkmanager-1.0
+    # the following may be unnecessary:
+    - python-dbus
+    - libnm-glib4
+    - libnm-gtk0
+    - python-gobject
+  when: ansible_distribution in ['Debian', 'Ubuntu']
+
+
 
 # TODO https://github.com/ansible/ansible/issues/34012
 - name: configure lasercutter lan

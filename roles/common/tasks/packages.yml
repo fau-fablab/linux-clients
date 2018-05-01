@@ -32,29 +32,17 @@
     - repos
 
 - name: add debian package sources non-free
-  command: apt-add-repository "deb http://http.debian.net/debian/ stretch main non-free contrib"
+  apt_repository:
+    repo: deb http://http.debian.net/debian/ stretch main non-free contrib
+    state: present
   when: ansible_distribution == 'Debian'
   tags:
     - debian-packages
     - debian-repos
     - repos
 
-- name: install debian non-free firmware
-  apt:
-    name: "{{ item }}"
-    state: present
-    update_cache: true
-  with_items:
-    - firmware-linux-nonfree
-    - firmware-realtek
-    - firmware-iwlwifi
-    - firmware-atheros
-  when: ansible_distribution == 'Debian'
-  tags:
-    - debian-packages
-
 - name: remove unneded packages
-  dnf:
+  package:
     name: '{{ pkg_names[item]|default(item) }}'
     state: absent
   with_items:
@@ -64,7 +52,7 @@
     - packages-absent
 
 - name: install common packages
-  dnf:
+  package:
     name: '{{ pkg_names[item]|default(item) }}'
     state: present
   with_items:

@@ -24,18 +24,25 @@ packages:
       - libreoffice
       - ncdu
       - openscad
-      - remmina
-      - remmina-plugins-rdp
       - tmux
       - tree
       - vim
       - vlc
-    Fedora: []
+      - krdc
+    Fedora:
+    # remmina is not available in debian stretch :-(
+      - remmina
+      - remmina-plugins-rdp
     Debian:
+      - acl
       - bash-completion
       - task-kde-desktop
       - task-german
       - task-german-kde-desktop
+      - firmware-linux-nonfree
+      - firmware-realtek
+      - firmware-iwlwifi
+      - firmware-atheros
     Ubuntu: []
   absent:
     all: []

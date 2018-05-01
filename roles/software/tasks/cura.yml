@@ -1,0 +1,75 @@
+---
+
+- name: install cura (Fedora)
+  dnf:
+    name: cura
+    state: present
+  when: ansible_distribution == 'Fedora'
+  tags:
+    - cura-install
+    - packages
+
+- name: install cura (AppImage)
+  get_url:
+    url: https://download.ultimaker.com/current/Cura-3.3.1.AppImage
+    dest: /usr/local/bin/cura
+    mode: 0755
+  when: ansible_distribution != 'Fedora'
+  tags:
+    - cura-install
+    - packages
+
+- name: add cura desktop icon
+  copy:
+    src: 'cura-install/{{ item }}'
+    dest: '/{{ item }}'
+    owner: fablab
+    group: fablab
+    mode: 'u=rw,g=rw,o=r'
+  with_items:
+    - usr/share/applications/cura.desktop
+    - usr/local/share/cura-icon.png
+  when: ansible_distribution != 'Fedora'
+  tags:
+    - cura-install
+    - packages
+
+- name: add cura desktop icon link
+  file:
+    src: /usr/share/applications/cura.desktop
+    dest: /home/fablab/Schreibtisch/cura.desktop
+    state: link
+    owner: fablab
+    group: fablab
+    mode: 'u=rw,g=rw,o=r'
+  tags:
+    - cura-install
+    - packages    
+
+- name: add cura config folders
+  file:
+    path: '{{ item }}'
+    state: directory
+    owner: fablab
+    group: fablab
+    mode: 'u=rwX,g=rwX,o=rX'
+  with_items:
+    - /home/fablab/.config/cura/
+    - /home/fablab/.local/share/cura/
+  tags:
+    - cura-config
+    - configs
+
+- name: add cura config files
+  copy:
+    src: 'cura/{{ item }}'
+    dest: '/home/fablab/.{{ item }}'
+    owner: fablab
+    group: fablab
+    mode: 'u=rw,g=rw,o=r'
+  with_items:
+    - config/cura/
+    - local/share/cura/
+  tags:
+    - cura-config
+    - configs

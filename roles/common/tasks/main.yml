@@ -1,5 +1,13 @@
 ---
 
+# Common tasks: Basic dependencies of ansible, and anything which does not require later tasks.
+# These MUST NOT depend on the fablab user being available, because it will be added later.
+
+
+- name: Verify ansible is new enough # 2.2 is too old, 2.5 is new enough, something inbetween could also be okay
+  assert:
+    that: "ansible_version.full is version_compare('2.5', '>=')"
+
 - import_tasks: packages.yml
   tags: packages
 
@@ -17,13 +25,5 @@
   tags:
     - unattented-upgrades
     - dnf-automatic
-
-- import_tasks: visicut.yml
-  tags:
-    - visicut
-
-- import_tasks: cura.yml
-  tags:
-    - cura
 
 ...

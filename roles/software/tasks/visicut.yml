@@ -16,25 +16,18 @@
 # may be slow. Download server is weird sometimes.
 # TODO: download latest version
 - name: download VisiCut deb package (Debian, Ubuntu)
-  get_url:
-    url: 'https://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-14-g56bbf936-1_all.deb'
-    dest: /var/run/visicut.deb
-  when: ansible_distribution in ["Debian", "Ubuntu"]
-  tags:
-    - visicut-download
-
-- name: install VisiCut (Debian, Ubuntu)
-  command: dpkg -i /var/run/visicut.deb
+  apt:
+    deb: 'http://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-23-ga18789c7-1_all.deb'
+    allow_unauthenticated: yes
   when: ansible_distribution in ["Debian", "Ubuntu"]
   tags:
     - visicut-install
-    - packages
 
 # may be slow. Download server is weird sometimes.
 # TODO: download latest version
 - name: download and extract VisiCut zip archive (Fedora)
   unarchive:
-    src: 'https://download.visicut.org/files/master/All/VisiCut-1.8-14-g56bbf936.zip'
+    src: 'http://download.visicut.org/files/master/All/VisiCut-1.8-23-ga18789c7.zip'
     dest: /opt/
     remote_src: true
     owner: root

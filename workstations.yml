@@ -6,9 +6,11 @@
     - group_vars/all.yml
     - 'group_vars/{{ ansible_distribution }}.yml'
   roles:
-    - role: users
-      tags: users
     - role: common
       tags: common
+    - role: users
+      tags: users
+    - role: software
+      tags: software
     - role: fablab-share
       tags: fablab-share

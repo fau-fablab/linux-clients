@@ -1,0 +1,15 @@
+---
+
+# Software.
+# The fablab user and all common dependencies are already installed at this point.
+
+
+- import_tasks: visicut.yml
+  tags:
+    - visicut
+
+- import_tasks: cura.yml
+  tags:
+    - cura
+
+...

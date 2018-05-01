@@ -143,7 +143,12 @@ Compression delayed
 ClientAliveInterval 0
 ClientAliveCountMax 3
 
+{% if ansible_distribution == "Fedora" %}
 ShowPatchLevel no
+{% else %}
+# ShowPatchLevel is not supported on debian stretch
+{% endif %}
+
 
 # don't allow hostnames in ~/.ssh/authorized_keys from and sshd_config Match Host directives
 UseDNS no
@@ -171,4 +176,8 @@ AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
 AcceptEnv XMODIFIERS
 
 # allow sftp-server as a subsystem
+{% if ansible_distribution == "Fedora" %}
 Subsystem	sftp	/usr/libexec/openssh/sftp-server
+{% else %}
+Subsystem	sftp	/usr/lib/openssh/sftp-server
+{% endif %}

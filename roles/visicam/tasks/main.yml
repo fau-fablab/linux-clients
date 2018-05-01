@@ -13,6 +13,7 @@
     - git
     - v4l2ucp
     - fswebcam
+    - curl
   tags:
     - packages
 

@@ -77,6 +77,14 @@
     group: fablab
     mode: 'u=rw,g=o='
 
+- name: workaround for firefox-esr on Debian
+  file:
+    src: "/usr/share/applications/firefox-esr.desktop"
+    dest: "/usr/share/applications/firefox.desktop"
+    state: link
+  when: ansible_distribution == 'Debian'
+
+    
 - name: add desktop links to desktop
   file:
     src: "/usr/share/applications/{{ item }}.desktop"
