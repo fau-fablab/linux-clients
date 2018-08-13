@@ -75,3 +75,8 @@
   systemd:
     name: visicam.service
     enabled: true
+
+- name: VisiCam shortcut on fablab desktop
+  template:
+    src: home/fablab/Schreibtisch/visicam-status.desktop.j2
+    dest: /home/fablab/Schreibtisch/visicam-status.desktop

@@ -61,6 +61,14 @@
     group: fablab
     mode: 'u=rw,g=o='
 
+- name: fix GTK color scheme (so that inkscape tooltips are readable)
+  template:
+    src: kcmdisplayrc.j2
+    dest: /home/fablab/.config/kcmdisplayrc
+    owner: fablab
+    group: fablab
+    mode: 'u=rw,g=o='
+
 - name: set default samba password (if someone tries to access brain via kde tools)
   template:
     src: kioslaverc.j2

@@ -13,28 +13,51 @@
     - visicut-packages
     - packages
 
+- name: enable Java Font antialiasing
+  template:
+    src: etc/profile.d/java_antialiasing.sh
+    dest: /etc/profile.d/java_antialiasing.sh
+    mode: 'u=rwX,g=rX,o=rX'
+  tags:
+   - visicut-packages
+
+- set_fact:
+    visicut_version: 1.8-31-g2d3f6b97
+
+- name: test if visicut is up-to-date
+  shell: 'PATH=/usr/local/bin:$PATH visicut --version 2>&1 | fgrep -q {{visicut_version}} && echo true || echo false'
+  register: visicut_up_to_date_tmp
+  ignore_errors: yes
+
+- set_fact:
+    visicut_up_to_date='{{ visicut_up_to_date_tmp.stdout | trim | bool }}'
+
+- debug:
+    var: visicut_up_to_date
+- debug:
+    var: visicut_up_to_date_tmp.stdout
+
 # may be slow. Download server is weird sometimes.
 # TODO: download latest version
 - name: download VisiCut deb package (Debian, Ubuntu)
   apt:
-    deb: 'http://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_1.8-23-ga18789c7-1_all.deb'
+    deb: 'https://download.visicut.org/files/master/Debian-Ubuntu-Mint/visicut_{{visicut_version}}-1_all.deb'
     allow_unauthenticated: yes
-  when: ansible_distribution in ["Debian", "Ubuntu"]
+  when: ansible_distribution in ["Debian", "Ubuntu"] and not visicut_up_to_date
   tags:
     - visicut-install
 
 # may be slow. Download server is weird sometimes.
-# TODO: download latest version
+# TODO: always download the latest version
 - name: download and extract VisiCut zip archive (Fedora)
   unarchive:
-    src: 'http://download.visicut.org/files/master/All/VisiCut-1.8-23-ga18789c7.zip'
+    src: 'https://download.visicut.org/files/master/All/VisiCut-{{visicut_version}}.zip'
     dest: /opt/
     remote_src: true
     owner: root
     group: root
     mode: 'u=rwX,g=rX,o=rX'
-    creates: /opt/visicut/VisiCut.Linux
-  when: ansible_distribution == 'Fedora'
+  when: ansible_distribution == 'Fedora' and not visicut_up_to_date
   tags:
     - visicut-install
     - packages
