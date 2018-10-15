@@ -23,8 +23,6 @@
     - python-gobject
   when: ansible_distribution in ['Debian', 'Ubuntu']
 
-
-
 # TODO https://github.com/ansible/ansible/issues/34012
 - name: configure lasercutter lan
   nmcli:

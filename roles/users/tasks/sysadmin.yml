@@ -1,6 +1,5 @@
----
-
 # set up the admin user
+---
 
 - name: wheel group
   group:
@@ -16,8 +15,8 @@
 - name: add authorized keys to user sysadmin
   authorized_key:
     user: sysadmin
-    key: '{{item}}'
-  with_items: '{{ ssh_pubkeys.values() }}'
+    key: '{{ item }}'
+  with_items: '{{ ssh_pubkeys.values()|list }}'
   tags:
     - sysadmin-authorized-keys
     - ssh
